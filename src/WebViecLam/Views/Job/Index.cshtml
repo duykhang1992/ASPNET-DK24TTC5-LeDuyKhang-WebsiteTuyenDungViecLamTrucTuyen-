@@ -1,0 +1,118 @@
+﻿@model PagedList.IPagedList<WebViecLam.Models.Job>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Danh sách việc làm";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2 class="mt-4 mb-4">Tìm kiếm việc làm</h2>
+
+<div class="card mb-4 bg-light shadow-sm border-0">
+    <div class="card-body">
+        @using (Html.BeginForm("Index", "Job", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-md-5 mb-2">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa fa-search text-muted"></i></span>
+                        <input type="text" name="searchString" value="@ViewBag.CurrentSearch" class="form-control form-control-lg border-start-0" placeholder="Nhập từ khóa, tên công ty...">
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa fa-map-marker text-muted"></i></span>
+                        <select name="location" class="form-control form-control-lg border-start-0">
+                            <option value="">-- Tất cả địa điểm --</option>
+                            <option value="Đồng Tháp" @(ViewBag.CurrentLocation == "Đồng Tháp" ? "selected" : "")>Đồng Tháp</option>
+                            <option value="Tiền Giang" @(ViewBag.CurrentLocation == "Tiền Giang" ? "selected" : "")>Tiền Giang</option>
+                            <option value="Vĩnh Long" @(ViewBag.CurrentLocation == "Vĩnh Long" ? "selected" : "")>Vĩnh Long</option>
+                            <option value="TP. Hồ Chí Minh" @(ViewBag.CurrentLocation == "TP. Hồ Chí Minh" ? "selected" : "")>TP. Hồ Chí Minh</option>
+                            <option value="Hà Nội" @(ViewBag.CurrentLocation == "Hà Nội" ? "selected" : "")>Hà Nội</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-2">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        Lọc kết quả
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(ViewBag.CurrentSearch) || !string.IsNullOrEmpty(ViewBag.CurrentLocation))
+{
+    <div class="alert alert-info mb-4">
+        Tìm thấy <strong>@Model.Count()</strong> công việc phù hợp với tiêu chí của bạn.
+        <a href="@Url.Action("Index", "Job")" class="float-end text-decoration-none">Xóa bộ lọc</a>
+    </div>
+}
+
+<div class="row mt-4 mb-4">
+    <div class="col-12 text-center">
+        <h2 class="font-weight-bold text-primary">Khám phá cơ hội nghề nghiệp</h2>
+        <p class="text-muted">Hàng ngàn việc làm chất lượng cao đang chờ đón bạn</p>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        var logoUrl = string.IsNullOrEmpty(item.LogoPath)
+                      ? $"https://ui-avatars.com/api/?name={item.CompanyName}&background=random&color=fff&size=100&rounded=true"
+                      : item.LogoPath;
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm border-0 job-card" style="border-radius: 15px; transition: 0.3s;">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="@logoUrl" alt="@item.CompanyName" class="rounded-circle shadow-sm" width="60" height="60" style="object-fit: cover;">
+                        <div class="ml-3 ps-3">
+                            <h5 class="card-title mb-1 font-weight-bold">
+                                <a href="@Url.Action("Details", "Job", new { id = item.JobId })" class="text-dark text-decoration-none">@item.Title</a>
+                            </h5>
+                            <span class="text-muted small"><i class="fa fa-building-o"></i> @item.CompanyName</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <span class="badge bg-success p-2 mr-2 mb-2"><i class="fa fa-money"></i> @item.Salary</span>
+                        <span class="badge bg-info text-white p-2 mb-2"><i class="fa fa-map-marker"></i> @item.Location</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-top pb-3 pt-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted"><i class="fa fa-clock-o"></i> Hạn: @item.Deadline.ToString("dd/MM/yyyy")</small>
+                        @Html.ActionLink("Ứng tuyển ngay", "Details", "Job", new { id = item.JobId }, new { @class = "btn btn-outline-primary btn-sm rounded-pill px-4" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="row mt-4 mb-5">
+    <div class="col-12 d-flex justify-content-center">
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+                 new { page, searchString = ViewBag.CurrentSearch, location = ViewBag.CurrentLocation }),
+                 new PagedListRenderOptions
+                 {
+                     LiElementClasses = new string[] { "page-item" },
+                     FunctionToTransformEachPageLink = (liTag, aTag) => { aTag.Attributes.Add("class", "page-link"); return aTag; }
+                 })
+    </div>
+</div>
+
+<style>
+    /* Hiệu ứng nổi lên khi rê chuột */
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        border-color: #0d6efd !important;
+    }
+</style>

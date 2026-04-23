@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Huy Long\\source\\repos\\WebViecLam\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B52129D6-B663-4112-A59E-0A0C81BE7FC8}|WebViecLam\\WebViecLam.csproj|c:\\users\\huy long\\source\\repos\\webvieclam\\webvieclam\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B52129D6-B663-4112-A59E-0A0C81BE7FC8}|WebViecLam\\WebViecLam.csproj|solutionrelative:webvieclam\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B52129D6-B663-4112-A59E-0A0C81BE7FC8}|WebViecLam\\WebViecLam.csproj|c:\\users\\huy long\\source\\repos\\webvieclam\\webvieclam\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B52129D6-B663-4112-A59E-0A0C81BE7FC8}|WebViecLam\\WebViecLam.csproj|solutionrelative:webvieclam\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Huy Long\\source\\repos\\WebViecLam\\WebViecLam\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebViecLam\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Huy Long\\source\\repos\\WebViecLam\\WebViecLam\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebViecLam\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T08:53:35.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Huy Long\\source\\repos\\WebViecLam\\WebViecLam\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebViecLam\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Huy Long\\source\\repos\\WebViecLam\\WebViecLam\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "WebViecLam\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAcwFgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T08:52:40.545Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

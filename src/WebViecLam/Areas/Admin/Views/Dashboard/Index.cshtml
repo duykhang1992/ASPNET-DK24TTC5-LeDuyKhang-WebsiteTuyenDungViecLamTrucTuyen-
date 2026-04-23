@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Bảng điều khiển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-4 text-dark font-weight-bold">Tổng quan hệ thống</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-primary text-white p-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6 class="text-uppercase small">Tổng việc làm</h6>
+                    <h2 class="mb-0">@ViewBag.TotalJobs</h2>
+                </div>
+                <i class="fa fa-briefcase fa-3x opacity-50"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-success text-white p-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6 class="text-uppercase small">Người dùng</h6>
+                    <h2 class="mb-0">@ViewBag.TotalUsers</h2>
+                </div>
+                <i class="fa fa-users fa-3x opacity-50"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm bg-warning text-white p-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h6 class="text-uppercase small">Hồ sơ ứng tuyển</h6>
+                    <h2 class="mb-0">@ViewBag.TotalApplications</h2>
+                </div>
+                <i class="fa fa-file-text fa-3x opacity-50"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white font-weight-bold">
+                Tăng trưởng bài đăng (7 ngày qua)
+            </div>
+            <div class="card-body">
+                <canvas id="jobChart" height="150"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white font-weight-bold">Lối tắt nhanh</div>
+            <div class="card-body">
+                <a href="@Url.Action("Index", "Job", new { area = "Admin" })" class="btn btn-outline-primary w-100 mb-2">Duyệt tin tuyển dụng</a>
+                <a href="@Url.Action("Index", "User", new { area = "Admin" })" class="btn btn-outline-success w-100 mb-2">Kiểm tra người dùng</a>
+                <button onclick="alert('Tính năng in báo cáo sắp ra mắt!')" class="btn btn-outline-dark w-100">Xuất báo cáo PDF</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('jobChart').getContext('2d');
+    const jobChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ChartLabels)),
+            datasets: [{
+                label: 'Số lượng bài đăng',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.ChartData)),
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            scales: {
+                y: { beginAtZero: true, ticks: { stepSize: 1 } }
+            }
+        }
+    });
+</script>

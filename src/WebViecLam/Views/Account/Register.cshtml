@@ -1,0 +1,54 @@
+﻿@model WebViecLam.Models.User
+
+@{
+    ViewBag.Title = "Đăng ký tài khoản";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Đăng ký thành viên</h4>
+            </div>
+            <div class="card-body p-4">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">@ViewBag.Error</div>
+                }
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.FullName, new { @class = "font-weight-bold" })
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.Email, new { @class = "font-weight-bold" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required" })
+                    </div>
+
+                    <div class="form-group mb-3">
+                        @Html.LabelFor(m => m.Password, new { @class = "font-weight-bold" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "required" })
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold">Bạn là:</label>
+                        <select name="Role" class="form-control">
+                            <option value="Candidate">Người tìm việc</option>
+                            <option value="Employer">Nhà tuyển dụng</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-success btn-block w-100 mb-3">Đăng ký ngay</button>
+                    <div class="text-center">
+                        Đã có tài khoản? <a href="@Url.Action("Login")">Đăng nhập</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

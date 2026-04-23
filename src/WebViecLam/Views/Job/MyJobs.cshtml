@@ -1,0 +1,71 @@
+﻿@model IEnumerable<WebViecLam.Models.Job>
+
+@{
+    ViewBag.Title = "Việc làm của tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="font-weight-bold text-primary"><i class="fa fa-tasks"></i> Quản lý Tin Tuyển Dụng</h2>
+        <a href="@Url.Action("Create", "Job")" class="btn btn-primary"><i class="fa fa-plus"></i> Đăng tin mới</a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info shadow-sm border-0" style="border-radius: 10px;">
+            <i class="fa fa-info-circle"></i> Bạn chưa đăng tin tuyển dụng nào. Hãy bắt đầu tìm kiếm những ứng viên tài năng ngay hôm nay!
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0" style="border-radius: 15px; overflow: hidden;">
+            <div class="card-body p-0">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">Chức danh công việc</th>
+                            <th>Ngày đăng</th>
+                            <th>Hạn nộp</th>
+                            <th class="text-center">Số ứng viên</th>
+                            <th class="text-center pe-4">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4">
+                                    <h6 class="mb-1 fw-bold text-dark">@item.Title</h6>
+                                    <small class="text-muted"><i class="fa fa-map-marker text-danger"></i> @item.Location</small>
+                                </td>
+                                <td>@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @if (item.Deadline >= DateTime.Now)
+                                    {
+                                        <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-2 py-1">@item.Deadline.ToString("dd/MM/yyyy")</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-2 py-1">Đã hết hạn</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-info text-white rounded-pill px-3 py-2">
+                                        @(item.Applications != null ? item.Applications.Count.ToString() : "0")
+                                    </span>
+                                </td>
+                                <td class="text-center pe-4">
+                                    <a href="@Url.Action("Details", "Job", new { id = item.JobId })" class="btn btn-sm btn-outline-secondary" title="Xem bài đăng"><i class="fa fa-eye"></i></a>
+                                    <a href="@Url.Action("Candidates", "Job", new { jobId = item.JobId })" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-users"></i> Hồ sơ
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebViecLam.Models.User>
+
+@{
+    ViewBag.Title = "Quản lý người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fa fa-users text-primary"></i> Quản lý Người Dùng</h2>
+    <span class="badge bg-dark">Tổng số: @Model.Count() thành viên</span>
+</div>
+
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMsg"]</div>
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Họ và Tên</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">
+                                    @item.FullName.Substring(0, 1).ToUpper()
+                                </div>
+                                <div class="ms-3">
+                                    <p class="fw-bold mb-0">@item.FullName</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (item.Role == "Admin")
+                            {
+                                <span class="badge bg-danger">Quản trị viên</span>
+                            }
+                            else if (item.Role == "Employer")
+                            {
+                                <span class="badge bg-success">Nhà tuyển dụng</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-info text-white">Người tìm việc</span>
+                            }
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-sm btn-outline-primary" onclick="alert('Chức năng sửa thông tin sẽ cập nhật sau!')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <a href="@Url.Action("Delete", "User", new { area = "Admin", id = item.UserId })"
+                               class="btn btn-sm btn-outline-danger"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này? Mọi dữ liệu liên quan sẽ bị mất!')">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

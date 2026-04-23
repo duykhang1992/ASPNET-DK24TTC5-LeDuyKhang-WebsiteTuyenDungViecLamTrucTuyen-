@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @if (TempData["SuccessMsg"] != null)
+    {
+        // Vì bạn đã update lên Bootstrap 5, chúng ta dùng class của bản 5
+        <div class="alert alert-success alert-dismissible fade show shadow" role="alert"
+             style="position: fixed; top: 80px; right: 20px; z-index: 1050; min-width: 300px;">
+            <strong><i class="fa fa-check-circle"></i> Thành công!</strong> <br />
+            @TempData["SuccessMsg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("WebViecLam.Com", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    @if (Session["UserId"] != null)
+                    {
+                        if (Session["Role"]?.ToString() == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-danger fw-bold" href="@Url.Action("Index", "Job", new { area = "Admin" })">
+                                    <i class="fa fa-dashboard"></i> Trang Quản Trị
+                                </a>
+                            </li>
+                        }
+                        if (Session["Role"]?.ToString() == "Employer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary fw-bold" href="@Url.Action("MyJobs", "Job")">
+                                    <i class="fa fa-tasks"></i> Quản lý tin đăng
+                                </a>
+                            </li>
+                        }
+
+                        if (Session["Role"]?.ToString() == "Employer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" href="@Url.Action("Create", "Job", new { area = "" })">
+                                    <i class="fa fa-plus-circle"></i> Đăng tin
+                                </a>
+                            </li>
+                        }
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fa fa-user-circle"></i> @Session["FullName"]
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                                <li><a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Hồ sơ cá nhân</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="@Url.Action("Logout", "Account", new { area = "" })">
+                                        <i class="fa fa-sign-out"></i> Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">@Html.ActionLink("Đăng ký", "Register", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li class="nav-item">@Html.ActionLink("Đăng nhập", "Login", "Account", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+    // Tự động đóng thông báo sau 3 giây (3000 milliseconds)
+    setTimeout(function() {
+        var alertNode = document.querySelector('.alert');
+        if (alertNode) {
+            // Tương thích với Bootstrap 5
+            var alert = new bootstrap.Alert(alertNode);
+            alert.close();
+        }
+    }, 3000);
+    </script>
+</body>
+</html>

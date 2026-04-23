@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebViecLam.Models.Job>
+@{
+    ViewBag.Title = "Danh sách việc làm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; // Sử dụng layout admin vừa tạo
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fa fa-list text-primary"></i> Quản lý Tin Tuyển Dụng</h2>
+    <span class="badge bg-dark">Tổng số: @Model.Count() bài đăng</span>
+</div>
+
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMsg"]</div>
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Ngày đăng</th>
+                    <th>Tên công việc</th>
+                    <th>Công ty</th>
+                    <th>Địa điểm</th>
+                    <th class="text-center">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="small">@item.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td><strong>@item.Title</strong></td>
+                        <td>@item.CompanyName</td>
+                        <td><span class="badge bg-secondary">@item.Location</span></td>
+                        <td class="text-center">
+                            <a href="@Url.Action("Details", "Job", new { area = "", id = item.JobId })" target="_blank" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i></a>
+                            <a href="@Url.Action("Delete", "Job", new { area = "Admin", id = item.JobId })"
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Bạn có chắc chắn muốn xóa bài đăng này không?')">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

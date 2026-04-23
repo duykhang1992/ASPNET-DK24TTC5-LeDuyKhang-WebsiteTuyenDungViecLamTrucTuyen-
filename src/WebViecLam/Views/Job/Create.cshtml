@@ -1,0 +1,81 @@
+﻿@model WebViecLam.Models.Job
+
+@{
+    ViewBag.Title = "Đăng tin tuyển dụng";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fa fa-pencil-square-o"></i> Đăng tin tuyển dụng mới</h3>
+                </div>
+                <div class="card-body p-4">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger alert alert-danger" })
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control form-control-lg", placeholder = "VD: Lập trình viên C#" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Tên công ty của bạn" } })
+                                    @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", placeholder = "VD: TP.HCM, Hà Nội..." } })
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", placeholder = "VD: 15 - 20 Triệu" } })
+                                    @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    @Html.LabelFor(model => model.Deadline, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                                    @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label font-weight-bold" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "6", placeholder = "Nhập mô tả chi tiết công việc, yêu cầu kỹ năng, quyền lợi..." })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Đăng Tin Ngay</button>
+                            @Html.ActionLink("Hủy bỏ", "Index", null, new { @class = "btn btn-outline-secondary btn-lg ml-2" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
+
+<script>
+    // Tìm thẻ textarea có id là "Description" và biến nó thành trình soạn thảo
+    // Lưu ý: Tên id phải viết hoa chữ D cho khớp với Model
+    CKEDITOR.replace('Description');
+</script>

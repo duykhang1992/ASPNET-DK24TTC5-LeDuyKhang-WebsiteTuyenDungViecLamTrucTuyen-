@@ -1,0 +1,20 @@
+# 08/04/2026
+Nội dung công việc: Hoàn thiện hệ thống (Giao diện, Chức năng, Cơ sở dữ liệu).
+Về Cơ sở dữ liệu:
+Hoàn thiện sơ đồ quan hệ thực thể (Database Diagram) bao gồm các bảng cốt lõi: Users, Applications, Jobs.
+Về Giao diện (UI/UX):
+Thiết kế giao diện dễ sử dụng: Công nghệ Front-end: HTML5, CSS3, JavaScript và Bootstrap
+Xây dựng các trang chính: Trang chủ, Trang chi tiết công thức, Quản lý công thức, Đăng món mới, Quản lý danh mục.
+Về Chức năng:
+Phân hệ khách vãng lai: Xem trang chủ, tìm kiếm việc làm, xem chi tiết công việc, đăng ký tài khoản.
+Phân hệ người tìm việc: Đăng nhập/ đăng xuất, nộp hồ sơ ứng tuyển, quản lý thông tin cá nhân.
+Phân hệ nhà tuyển dụng: Đăng nhập/ đăng xuất, đăng tin tuyển dụng, quản lý tin đăng, quản lý ứng viên, cập nhật trạng thái ứng viên.
+Phân hệ quản trị viên: đăng nhập bảo mật, thống kê tổng quan, quản lý người dùng, quản lý tin tuyển dụng.
+# 21/04/2026
+Nội dung công việc: Tổng hợp và Cập nhật hồ sơ đồ án
+Cập nhật file báo cáo Word:
+Hệ thống hóa lại toàn bộ lý thuyết về kiến trúc MVC (Model - View - Controller), công nghệ Entity Framework và hệ quản trị SQL Server.
+Viết chi tiết chương "Hiện thực hóa nghiên cứu", mô tả bài toán và vẽ lược đồ Use Case tương tác với hệ thống.
+Chụp ảnh màn hình các kết quả đạt được giao diện trang chủ, giao diện tìm kiếm việc làm, giao diện chi tiết việc làm và ứng tuyển đưa vào báo cáo để minh chứng cho sản phẩm. Chạy thử các phân hệ khách, người tìm việc, nhà tuyển dụng, quản trị viên.
+Đánh giá các mặt đạt được và thẳng thắn nhìn nhận những hạn chế.
+Đề xuất hướng phát triển trong tương lai.
