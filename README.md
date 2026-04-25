@@ -12,8 +12,6 @@ Email: khangld231092@tvu-onschool.edu.vn
 Số điện thoại: 0886672082
 Giới thiệu Dự án được thực hiện nhằm xây dựng một nền tảng trực tuyến giúp cộng đồng tìm kiếm việc làm.
 
-Mục tiêu Đối với người dùng: Cung cấp công cụ tìm kiếm món ăn nhanh chóng, trình bày quy trình nấu ăn khoa học (nguyên liệu, các bước thực hiện). 
-
 Về kỹ thuật: áp dụng mô hình MVC giúp mã nguồn của hệ thống trở nên rõ ràng, dễ bảo trì và dễ dàng mở rộng các chức năng mới trong tương lai mà không làm ảnh hưởng đến cấu trúc hiện tại.
 
 Công nghệ sử dụng Ngôn ngữ: C# (C-Sharp) Framework: ASP.NET MVC ORM: Entity Framework Cơ sở dữ liệu: SQL Server Giao diện: HTML, CSS, JavaScript, Bootstrap
